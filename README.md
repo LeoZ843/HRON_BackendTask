@@ -11,10 +11,11 @@ A small backend service built with Node.js, TypeScript, Express, and PostgreSQL 
 - **ORM**: Prisma 7
 - **Testing**: Jest + Supertest
 - **Rate limiting**: express-rate-limit
+- **Logging**: Winston + Morgan
 
 ## Prerequisites
 
-- Node.js 20+
+- Node.js 22+
 - PostgreSQL 18
 - npm 10+
 
@@ -23,8 +24,8 @@ A small backend service built with Node.js, TypeScript, Express, and PostgreSQL 
 ### 1. Clone the repository
 
 ```bash
-git clone https://https://github.com/LeoZ843/HRON_BackendTask.git
-cd HRON_BackendTask
+git clone https://github.com/<your-username>/hr-on-backend.git
+cd hr-on-backend
 ```
 
 ### 2. Install dependencies
@@ -68,6 +69,14 @@ npx prisma migrate deploy
 npx prisma generate
 ```
 
+### 7. Seed the database
+
+Inserts sample records into the `task` table so the health endpoint returns `has_data: true` on a fresh setup:
+
+```bash
+npx prisma db seed
+```
+
 ## Running the server
 
 **Development** (ts-node, no compilation step):
@@ -82,6 +91,36 @@ npm start
 ```
 
 The server listens on the port defined in `.env` (default: `3000`).
+
+## Running with Docker
+
+### Build the image
+
+```bash
+docker build -t hron-backend .
+```
+
+### Run the container
+
+The container runs database migrations automatically before starting the server.
+
+**Linux / macOS:**
+```bash
+docker run --name hron-backend -p 3000:3000 \
+  -e DATABASE_URL="postgresql://hron_user:yourpassword@host.docker.internal:5432/hron_backend" \
+  -e PORT=3000 \
+  hron-backend
+```
+
+**Windows (PowerShell):**
+```powershell
+docker run --name hron-backend -p 3000:3000 `
+  -e DATABASE_URL="postgresql://hron_user:yourpassword@host.docker.internal:5432/hron_backend" `
+  -e PORT=3000 `
+  hron-backend
+```
+
+> `host.docker.internal` resolves to your host machine from inside the container.
 
 ## API
 
