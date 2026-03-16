@@ -1,0 +1,16 @@
+generator client {
+    provider = "prisma-client"
+    output   = "../generated/prisma"
+}
+
+datasource db {
+    provider = "postgresql"
+}
+
+model task {
+    id          Int      @id @default(autoincrement())    /// Primary key
+    brief       String   @db.VarChar(255)                 /// Short summary
+    description String   @db.Text                         /// Full task description
+    created_at  DateTime @default(now())                  /// Record creation time
+    updated_at  DateTime @updatedAt                       ///Last update time
+}

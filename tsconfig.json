@@ -1,0 +1,22 @@
+{
+    "compilerOptions": {
+        "target": "ES2022",
+        "module": "commonjs",
+        "lib": ["ES2022"],
+        "outDir": "./dist",
+        "types": ["node", "jest"],
+        "sourceMap": true,
+        "declaration": true,
+        "declarationMap": true,
+        "strict": true,
+        "noUncheckedIndexedAccess": true,
+        "exactOptionalPropertyTypes": true,
+        "isolatedModules": true,
+        "moduleDetection": "force",
+        "esModuleInterop": true,
+        "resolveJsonModule": true,
+        "skipLibCheck": true
+    },
+    "include": ["src/**/*", "tests/**/*", "generated/**/*"],
+    "exclude": ["node_modules", "dist"]
+}
